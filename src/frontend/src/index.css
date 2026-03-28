@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+    --background: 0.09 0.025 265;
+    --foreground: 0.95 0.005 250;
+    --card: 0.13 0.025 265;
+    --card-foreground: 0.95 0.005 250;
+    --popover: 0.13 0.025 265;
+    --popover-foreground: 0.95 0.005 250;
+    --primary: 0.75 0.18 210;
+    --primary-foreground: 0.08 0.01 265;
+    --secondary: 0.18 0.025 265;
+    --secondary-foreground: 0.95 0.005 250;
+    --muted: 0.18 0.025 265;
+    --muted-foreground: 0.62 0.04 255;
+    --accent: 0.62 0.22 292;
+    --accent-foreground: 0.98 0 0;
+    --destructive: 0.65 0.2 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.25 0.03 265;
+    --input: 0.2 0.025 265;
+    --ring: 0.75 0.18 210;
+    --chart-1: 0.75 0.18 210;
+    --chart-2: 0.62 0.22 292;
+    --chart-3: 0.65 0.24 340;
+    --chart-4: 0.7 0.18 160;
+    --chart-5: 0.65 0.2 25;
+    --sidebar: 0.1 0.025 265;
+    --sidebar-foreground: 0.95 0.005 250;
+    --sidebar-primary: 0.75 0.18 210;
+    --sidebar-primary-foreground: 0.08 0.01 265;
+    --sidebar-accent: 0.18 0.025 265;
+    --sidebar-accent-foreground: 0.95 0.005 250;
+    --sidebar-border: 0.25 0.03 265;
+    --sidebar-ring: 0.75 0.18 210;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, #050712 0%, #070b18 50%, #060d1a 100%);
+    min-height: 100vh;
+    color: #f3f6ff;
+    font-family: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(34, 211, 238, 0.4);
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(12, 18, 34, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(34, 211, 238, 0.15);
+  }
+
+  .glass-strong {
+    background: rgba(12, 18, 34, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(34, 211, 238, 0.2);
+  }
+
+  .neon-border {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+
+  .neon-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3), 0 0 40px
+      rgba(34, 211, 238, 0.15);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px
+      rgba(139, 92, 246, 0.15);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #22d3ee, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-btn {
+    background: linear-gradient(135deg, #22d3ee, #8b5cf6);
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), 0 0 40px
+      rgba(139, 92, 246, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .gradient-btn:hover {
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.6), 0 0 60px
+      rgba(139, 92, 246, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .tilt-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+  }
+
+  .tilt-card:hover {
+    transform: perspective(800px) rotateX(-4deg) rotateY(4deg) translateY(-8px);
+    box-shadow: 0 20px 60px rgba(34, 211, 238, 0.2), 0 10px 30px
+      rgba(139, 92, 246, 0.15);
+  }
+
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.6), 0 0 80px
+      rgba(139, 92, 246, 0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float-reverse {
+  animation: float-reverse 5s ease-in-out infinite;
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
